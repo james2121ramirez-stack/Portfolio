@@ -20,7 +20,6 @@
         <p id="message" aria-live="polite">Game started! Enter your first guess.</p>
         <p>Attempts remaining: <span id="attempts">7</span></p>
         <p>Score: <span id="score">0</span></p>
-        <button id="restart" type="button" hidden>Play again</button
     </main>
 
     <script>
@@ -29,7 +28,6 @@
         const message = document.querySelector("#message");
         const attemptsDisplay = document.querySelector("#attempts");
         const scoreDisplay = document.querySelector("#score");
-        const restartButton = document.querySelector("#restart");
 
         let secretNumber;
         let attempts;
@@ -46,7 +44,6 @@
             guessInput.value = "";
             guessInput.disabled = false;
             form.querySelector("button").disabled = false;
-            restartButton.hidden = true;
             guessInput.focus();
         }
 
@@ -85,11 +82,8 @@
             gameOver = true;
             guessInput.disabled = true;
             form.querySelector("button").disabled = true;
-            restartButton.hidden = false;
-            restartButton.focus();
         }
 
-        restartButton.addEventListener("click", startGame);
         startGame();
     </script>
 </body>
