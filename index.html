@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>My Personal Portfolio</title>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header>
+        <h2>MyPortfolio</h2>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HOME SECTION -->
+    <section class="home" id="home">
+        <div>
+            <h1>Hello, I'm <span>James S. Ramirez</span></h1>
+            <p>College Student | Aspiring IT Professional</p>
+            <a href="#about" class="btn">Explore My Portfolio</a>
+        </div>
+    </section>
+        <img src="JAMESSS.jpg" alt="James" class="profile-image">
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <h2 class="section-title">About Me</h2>
+
+        <p>
+            Hello! My name is James S. Ramirez. I am a college student
+            who is passionate about learning technology,
+            programming, and computer-related skills.
+
+            I enjoy exploring new ideas, improving my abilities,
+            and developing projects that help me grow as a
+            future IT professional.
+        </p>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="skills" id="skills">
+        <h2 class="section-title">My Skills</h2>
+
+        <div class="skill-container">
+            <div class="skill-card">HTML</div>
+            <div class="skill-card">CSS</div>
+            <div class="skill-card">Java</div>
+            <div class="skill-card">Problem Solving</div>
+            <div class="skill-card">Communication</div>
+            <div class="skill-card">Teamwork</div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="projects" id="projects">
+        <h2 class="section-title">My Projects</h2>
+
+        <div class="project-container">
+
+            <div class="project-card">
+                <h3>Number Guessing Game</h3>
+                <p>
+                    A Java console-based game where players
+                    guess a randomly generated number.
+                </p>
+            </div>
+
+            <div class="project-card">
+                <h3>Personal Portfolio</h3>
+                <p>
+                    A personal website created using HTML
+                    and CSS to showcase my profile and skills.
+                </p>
+            </div>
+
+            <div class="project-card">
+                <h3>Academic Activities</h3>
+                <p>Internet Configuration<br>
+                Computer Hardwares<br>
+                Set up Server and Client Desktop<br>
+                Setup of CCTV for office's 10pcs+<br>
+                Tesda NC II CSS<br>
+                Computer Troubleshooting</p>
+            </div>
+
+        </div>
+
+        <div class="game-demo">
+            <h3>Play the Number Guessing Game</h3>
+            <iframe
+                src="NumberGuessingGame.html"
+                title="Playable Number Guessing Game"
+                loading="lazy">
+            </iframe>
+        </div>
+
+        <details class="source-code">
+            <summary>View Java source code</summary>
+            <pre><code>import java.util.Random;
+import java.util.Scanner;
+
+public class NumberGuessingGame {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        Random random = new Random();
+        int score = 0;
+        String playAgain = "yes";
+
+        System.out.println("================================");
+        System.out.println("      NUMBER GUESSING GAME");
+        System.out.println("================================");
+        System.out.println("Welcome, Player!");
+
+        while (playAgain.equalsIgnoreCase("yes")) {
+            int secretNumber = random.nextInt(100) + 1;
+            int attempts = 0;
+            int maxAttempts = 7;
+            boolean guessedCorrectly = false;
+
+            System.out.println("\nGuess a number from 1 to 100.");
+            System.out.println("You have " + maxAttempts + " attempts.");
+
+            while (attempts &lt; maxAttempts) {
+                System.out.print("\nEnter your guess: ");
+
+                if (!input.hasNextInt()) {
+                    input.next();
+                    System.out.println("Please enter a whole number from 1 to 100.");
+                    continue;
+                }
+
+                int guess = input.nextInt();
+                if (guess &lt; 1 || guess &gt; 100) {
+                    System.out.println("Please enter a number from 1 to 100.");
+                    continue;
+                }
+
+                attempts++;
+
+                if (guess == secretNumber) {
+                    System.out.println("\nCongratulations! You guessed it!");
+                    System.out.println("Attempts used: " + attempts);
+                    score += (maxAttempts - attempts + 1) * 10;
+                    System.out.println("Your score: " + score);
+                    guessedCorrectly = true;
+                    break;
+                } else if (guess &lt; secretNumber) {
+                    System.out.println("Too low! Try a higher number.");
+                } else {
+                    System.out.println("Too high! Try a lower number.");
+                }
+
+                System.out.println("Attempts remaining: " + (maxAttempts - attempts));
+            }
+
+            if (!guessedCorrectly) {
+                System.out.println("\nGame Over!");
+                System.out.println("The correct number was: " + secretNumber);
+            }
+
+            System.out.print("\nDo you want to play again? (yes/no): ");
+            playAgain = input.next();
+        }
+
+        System.out.println("\n================================");
+        System.out.println("          GAME SUMMARY");
+        System.out.println("================================");
+        System.out.println("Final Score: " + score);
+        System.out.println("Thank you for playing!");
+        System.out.println("================================");
+
+        input.close();
+    }
+}</code></pre>
+        </details>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Contact Me</h2>
+
+        <p>Email:
+            <a href="james2121ramirez@Gmail.com">
+                james2121ramirez@Gmail.com
+            </a>
+        </p>
+
+        <p>Facebook:
+            <a href="https://www.facebook.com/profile.php?id=61583193657038">
+                My Facebook Profile
+            </a>
+        </p>
+
+        <p>1Guiset, Guimba, Nueva Ecija, Philippines</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>
+            &copy; 2026 James S. Ramirez | My Personal Portfolio
+        </p>
+    </footer>
+
+</body>
+</html>
