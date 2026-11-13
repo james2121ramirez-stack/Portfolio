@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="NumberGuessingGame.css">
+    <title>Number Guessing Game</title>
+</head>
+<body>
+    <main>
+        <h1>Number Guessing Game</h1>
+        <p>Guess a number from 1 to 100. You have 7 attempts.</p>
+
+        <form id="guess-form">
+            <label for="guess">Your guess:</label>
+            <input id="guess" name="guess" type="number" min="1" max="100" required autofocus>
+            <button type="submit">Submit guess</button>
+        </form>
+
+        <p id="message" aria-live="polite">Game started! Enter your first guess.</p>
+        <p>Attempts remaining: <span id="attempts">7</span></p>
+        <p>Score: <span id="score">0</span></p>
+        <button id="restart" type="button" hidden>Play again</button>
+        <p><a href="PROFILE.html">Back to profile</a></p>
+    </main>
+
+    <script>
+        const form = document.querySelector("#guess-form");
+        const guessInput = document.querySelector("#guess");
+        const message = document.querySelector("#message");
+        const attemptsDisplay = document.querySelector("#attempts");
+        const scoreDisplay = document.querySelector("#score");
+        const restartButton = document.querySelector("#restart");
+
+        let secretNumber;
+        let attempts;
+        let score = 0;
+        let gameOver;
+
+        function startGame() {
+            secretNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            gameOver = false;
+            attemptsDisplay.textContent = "7";
+            scoreDisplay.textContent = score;
+            message.textContent = "Game started! Enter your first guess.";
+            guessInput.value = "";
+            guessInput.disabled = false;
+            form.querySelector("button").disabled = false;
+            restartButton.hidden = true;
+            guessInput.focus();
+        }
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            if (gameOver) return;
+
+            const guess = Number(guessInput.value);
+            if (!Number.isInteger(guess) || guess < 1 || guess > 100) {
+                message.textContent = "Please enter a whole number from 1 to 100.";
+                guessInput.focus();
+                return;
+            }
+
+            attempts += 1;
+            const attemptsRemaining = 7 - attempts;
+            attemptsDisplay.textContent = attemptsRemaining;
+
+            if (guess === secretNumber) {
+                score += (7 - attempts + 1) * 10;
+                scoreDisplay.textContent = score;
+                message.textContent = `Congratulations! You guessed it in ${attempts} ${attempts === 1 ? "attempt" : "attempts"}!`;
+                endGame();
+            } else if (attemptsRemaining === 0) {
+                message.textContent = `Game over! The correct number was ${secretNumber}.`;
+                endGame();
+            } else {
+                const hint = guess < secretNumber ? "Too low! Try a higher number." : "Too high! Try a lower number.";
+                message.textContent = `${hint} ${attemptsRemaining} ${attemptsRemaining === 1 ? "attempt" : "attempts"} remaining.`;
+                guessInput.value = "";
+                guessInput.focus();
+            }
+        });
+
+        function endGame() {
+            gameOver = true;
+            guessInput.disabled = true;
+            form.querySelector("button").disabled = true;
+            restartButton.hidden = false;
+            restartButton.focus();
+        }
+
+        restartButton.addEventListener("click", startGame);
+        startGame();
+    </script>
+</body>
+</html>
